@@ -1,0 +1,19 @@
+---
+title: "Linear Regression Model of using sharebikes in London"
+author: "Jan Dudzik"
+date: "26 10 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Theoretical model
+
+Theoretical model of linear regression estimating number of bike rents in a hour takes form:
+\[
+y = \beta_0 + \beta_1*x_{i1} + \beta_2*x_{i2} + \epsilon_i
+\]
+
+
