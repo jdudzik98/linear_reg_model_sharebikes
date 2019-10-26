@@ -7,13 +7,47 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+london_merged <- read_csv("london_merged.csv")
 ```
 
 ## Theoretical model
 
 Theoretical model of linear regression estimating number of bike rents in a hour takes form:
 \[
-y = \beta_0 + \beta_1*x_{i1} + \beta_2*x_{i2} + \epsilon_i
+y_i = \beta_0 + \beta_1*x_{i1} + \epsilon_i
 \]
 
+## Creating dependent variables
 
+let x1 be a vector of x1i for i=1,.., N that are mean of hours feel temperatures in London
+\n let beta0 be a vector of 1's representing presence of intercept 
+\n let X be a matrix of observations
+
+```{r fig.align='center', out.width = "50%"}
+
+x1 <- as.numeric(as.character(london_merged$t2)) #temperature feels
+
+beta0 = rep(1,times=length(x1)) #creating column of 1's 
+
+X=cbind(beta0,x1)
+
+```
+
+Now let Y be vector of values of y_i, that are numbers of rented bicycles
+
+```{r fig.align='center', out.width = "50%"}
+
+Y = as.numeric(as.character(london_merged$cnt))
+
+
+```
+
+Using equation $\mathbf{b} = \left(  X^\top X  \right)^{-1}X^\top {y}$. let's calculate b_0 and b_1
+
+```{r fig.align='center', out.width = "50%"}
+
+b=solve(t(X)%*%X)%*%t(X)%*%cbind(Y)
+
+print(b)
+```
